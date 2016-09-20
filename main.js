@@ -27,6 +27,14 @@ io.on('connection', function (socket) {
     socket.on('error', function() {
         console.log('error');
     });
+
+    socket.on('send_new_message', function (msg) {
+        console.log('On send_new_message : ' + msg);
+        var jsonMsg = JSON.parse(msg);
+        var currDate = new Date();
+        jsonMsg.time = currDate.getHours().toString() + ":" + currDate.getMinutes().toString();
+        socket.emit('new_message', JSON.stringify(jsonMsg));
+    })
 });
 
 http.listen(3000);
