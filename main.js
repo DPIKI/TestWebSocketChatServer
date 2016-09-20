@@ -33,8 +33,10 @@ io.on('connection', function (socket) {
         var jsonMsg = JSON.parse(msg);
         var currDate = new Date();
         jsonMsg.time = currDate.getHours().toString() + ":" + currDate.getMinutes().toString();
-        socket.emit('new_message', JSON.stringify(jsonMsg));
+        io.emit('new_message', JSON.stringify(jsonMsg));
     })
 });
 
 http.listen(process.env.PORT || 3000);
+
+console.log('Server started');
